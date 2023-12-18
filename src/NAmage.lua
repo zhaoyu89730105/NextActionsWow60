@@ -1,11 +1,11 @@
 function getNA8Actions(no)
   if(no < 0)then return {};
   elseif(no == 0)then
-    return {'45438','11426','12042','114923','5143','44425','30451'};
+    return {'133'};
   elseif(no == 1)then
-    return {'45438','11426','12472','30455','55342','84714','112948','108839','116','120','30449','31687'};
+    return {'133'};
   elseif(no == 2)then
-    return {'108839','116011','30449'};
+    return {'133'};
   end
   return {};
 end

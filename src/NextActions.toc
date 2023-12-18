@@ -1,8 +1,12 @@
 ## Author: watano(watano@qq.com)
-## Interface: 70000
+## Interface: 11500
 ## Title: NextActions
-## Notes: wow自动施法按键助手 
-## Version: 7.0
+## Title-zhCN:|CFF33AAFF[辅助]|wow自动施法按键助手
+## Notes-zhCN:|CFF33AAFFwow自动施法按键助手。
+## X-Repple: 辅助
+## Dependencies: 
+## Q-CAT-Version: 000100
+## OptionalDeps: BigFoot, WoWShell
 ## SavedVariablesPerCharacter: NA_Config
 NAutil.lua
 NAUIutil.lua

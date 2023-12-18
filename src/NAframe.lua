@@ -2,37 +2,40 @@
 -- Create Date : 8/16/2009 7:36:35 PM
 
 function NA_Main_Frame_OnLoad(self)
+  W_Log(3,"NA_OnLoad...");
+
+  self:RegisterEvent("SPELLS_CHANGED");
   self:RegisterEvent("COMBAT_LOG_EVENT");
-  self:RegisterEvent("CURRENT_SPELL_CAST_CHANGED");
   self:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED");
   self:RegisterEvent("PLAYER_TARGET_CHANGED");
   self:RegisterEvent("SPELLS_CHANGED");
-  self:RegisterEvent("SPELL_UPDATE_COOLDOWN");
-  self:RegisterEvent("SPELL_UPDATE_USABLE");
   self:RegisterEvent("UNIT_AURA");
-  self:RegisterEvent("UNIT_AURASTATE");
-  self:RegisterEvent("UNIT_SPELLCAST_DELAYED");
-  self:RegisterEvent("UNIT_SPELLCAST_FAILED");
-  self:RegisterEvent("UNIT_SPELLCAST_FAILED_QUIET");
-  self:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
-  self:RegisterEvent("UNIT_SPELLCAST_SENT");
-  self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
   self:RegisterEvent("ADDON_LOADED");
   self:RegisterEvent("COMBAT_TEXT_UPDATE");
   self:RegisterEvent("PLAYER_DEAD");
   self:RegisterEvent("PLAYER_ENTERING_WORLD");
   self:RegisterEvent("PLAYER_LOGIN");
-
-  W_Log(1,"NA_OnLoad...");
+  self:RegisterEvent("UNIT_SPELLCAST_STOP")
+  self:RegisterEvent("UNIT_SPELLCAST_FAILED")
+  self:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+  self:RegisterEvent("UNIT_SPELLCAST_DELAYED")
+  W_Log(3,"NA_OnLoad...");
   NA_init();
-  self:SetBackdrop({
+  W_Log(3,"NA_OnLoad.qqqq..");
+  local StatsFrame = CreateFrame("Frame", nil, self, "BackdropTemplate")
+  StatsFrame:SetBackdrop({
     bgFile = "Interface\\Addons\\NextActions\\white16x16",
     edgeFile = "Interface\\Addons\\NextActions\\white16x16",
     tile = true, tileSize = 0, edgeSize = 1,
     insets = { left = 0, right = 0, top = 0, bottom = 0 }
   });
-  self:SetBackdropColor(0,0,0,1);
+  StatsFrame:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+  StatsFrame:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
+  StatsFrame:SetBackdropColor(0,0,0,1);
+  StatsFrame:Show();
+  self.edgeBackdrop = StatsFrame
   self:Show();
+  W_Log(3,"NA_OnLoad...end4");
 end
 
 function NA_Option_Frame_OnLoad(self)
@@ -40,23 +43,26 @@ function NA_Option_Frame_OnLoad(self)
   local left = 5;
   --enable profile
   local frameProfile = W_createNCBtn("cbtnNA_Profile", NA_ProfileSize, self,"P:", top, left);
-
+  W_Log(3,"NA_Option_Frame2_OnLoad...");
   for i=0,NA_ProfileSize-1 do
 		local btnProfile = getglobal("cbtnNA_Profile"..i);
     btnProfile:SetScript("OnClick",
       function(self, button, down)
+        W_Log(3,"NA_Option_F222322rame_OnL2oad...");
         NA_Option_Frame_Update();
       end
     );
 		W_SetTooltip(btnProfile, NA_ProfileNames[i], NA_ProfileDescriptions[i]);
   end
+  W_Log(3,"NA_Option_Frame_OnLoad...");
   NA_Option_Frame_Update();
+  W_Log(3,"NA_Option_Frame_OnLoad...12");
   top = top - frameProfile:GetHeight();
 
   local frameFlag = W_createNCBtn("cbtnNA_Flag",3,self,"F:", top, left);
   getglobal("cbtnNA_Flag"..0):SetScript("OnClick",
     function(self, button, down)
-      NA_IsAOE = self:GetChecked();
+      NA_IsAOE = this:GetChecked();
       if(NA_IsAOE)then
         W_Log(3, "AOE mode enable!");
       end
@@ -93,7 +99,7 @@ function NA_Option_Frame_OnLoad(self)
   spellLabel:SetWidth(100);
 
   W_UpdateLabelText('NA_SpellLabel', "....");
-
+  W_Log(3,"NA_Option_Frame_OnewwLoad...");
   self:SetHeight(top*-1+40);
   self:SetWidth(110);
   self:Show();

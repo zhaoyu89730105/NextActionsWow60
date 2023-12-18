@@ -3,7 +3,10 @@
 	<Frame name="NA_Main_Frame" alpha="1" toplevel="true" frameStrata="HIGH" parent="UIParent" movable="false"
 		hidden="false">
 		<Scripts>
-			<OnLoad>NA_Main_Frame_OnLoad(self);</OnLoad>
+			<OnLoad>
+				NA_Main_Frame_OnLoad(self);
+
+			</OnLoad>
 			<OnEvent>NA_OnEvent(event,...);</OnEvent>
 		</Scripts>
 		<Size><AbsDimension x="16" y="16"/></Size>

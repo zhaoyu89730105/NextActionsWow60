@@ -171,7 +171,7 @@ function NA_InitClass()
           NA_ClassInfo[v]['castTime'] = castTime;
           NA_ClassInfo[v]['minRange'] = minRange;
           NA_ClassInfo[v]['maxRange'] = maxRange;
-          W_Log(1,"NA_ClassInfo["..k.."]: ".. name);
+          W_Log(3,"NA_ClassInfo["..k.."]: ".. name);
           NA_ClassInfo[v]['keyNo'] = no;
           W_SetBinding(no, NA_ClassInfo[v].name, 1);
 					W_Log(3,"IsPlayerSpell error: ".. k..'--'..v);
